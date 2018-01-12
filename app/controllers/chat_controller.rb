@@ -5,6 +5,7 @@ class ChatController < ApplicationController
   end
 
   def add_user
+    cookies.permanent[:room] = params[:room]
     redirect_to "/chat_room?#{params[:username]}"
   end
 

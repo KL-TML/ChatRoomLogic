@@ -2,6 +2,8 @@
 // All this logic will automatically be available in application.js.
 
 addEventListener('DOMContentLoaded', () => {
+  if (location.search == "") return
+
   logged_in.innerText = location.search.substr(1)
 
   const chat_channel = App.cable.subscriptions.create('ChatChannel', {
@@ -17,7 +19,8 @@ addEventListener('DOMContentLoaded', () => {
     e.preventDefault()
     const username = location.search.substr(1)
     const message = text_message.value
-    chat_channel.send({ username, message})
+    const room = the_room.innerText
+    chat_channel.send({ username, message, room })
     text_message.value = ''
   })
 
